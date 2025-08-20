@@ -17,4 +17,3 @@ logging.basicConfig(
 if __name__ == "__main__":
     raw_data = extract.extract_data(api_url)
     clean_data, technical_data = transform.transform_data(raw_data)
-    print(clean_data.head(20))
