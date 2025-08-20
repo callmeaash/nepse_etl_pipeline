@@ -1,4 +1,0 @@
-2025-08-20 01:09:25,260 - pipeline_utils.extract - INFO - Attempting to read tickers from C:\Users\aashi\Desktop\stock_names_data\hydropower.csv
-2025-08-20 01:09:25,275 - pipeline_utils.extract - ERROR - Stocks file not found
-2025-08-20 01:10:09,572 - pipeline_utils.extract - INFO - Attempting to read tickers from C:\Users\aashi\Desktop\nepse_etl_pipeline\stock_names_data\hydropower.csv
-2025-08-20 01:10:09,592 - pipeline_utils.extract - INFO - Successfully read the tickers from C:\Users\aashi\Desktop\nepse_etl_pipeline\stock_names_data\hydropower.csv

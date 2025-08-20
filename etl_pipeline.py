@@ -7,7 +7,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('etl_pipeling.log'),
+        logging.FileHandler('etl_pipeline.log'),
         logging.StreamHandler()
     ]
 )
