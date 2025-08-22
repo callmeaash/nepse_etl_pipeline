@@ -46,4 +46,4 @@ def extract_data(api_url: str) -> pd.DataFrame:
         return combined_df
     else:
         logger.error("No stock data fetched")
-        return pd.DataFrame()
+        raise ValueError('Not stock data fetched')

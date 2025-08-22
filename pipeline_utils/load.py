@@ -2,10 +2,8 @@ import pandas as pd
 from sqlalchemy import create_engine
 import logging
 import os
-from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
-load_dotenv()
 
 
 def load_data(clean_data: pd.DataFrame, technical_data: pd.DataFrame) -> None:

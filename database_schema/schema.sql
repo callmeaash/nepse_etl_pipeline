@@ -6,11 +6,15 @@ CREATE TABLE "stocks"(
 );
 
 
-CREATE TABLE "stocks_ohlc"(
+CREATE TABLE "ohlc"(
     "id" SERIAL PRIMARY KEY,
     "stock_id" INTEGER REFERENCES "stocks"("id") ON DELETE CASCADE,
-    "open" NUMERIC(10, 2),
-    "high" NUMERIC(10, 2),
-    "low" NUMERIC(10, 2),
-    "close" NUMERIC(10, 2)
+    "date" DATE,
+    "open" NUMERIC(20, 2),
+    "high" NUMERIC(20, 2),
+    "low" NUMERIC(20, 2),
+    "close" NUMERIC(20, 2),
+    "ltp" NUMERIC(20, 2),
+    "volume" INTEGER,
+    "amount" NUMERIC(20, 2)
 );

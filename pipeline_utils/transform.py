@@ -69,7 +69,7 @@ def transform_data(raw_data: pd.DataFrame) -> tuple:
     cols_to_round = ['per_change', 'MACD', 'MACD_signal', 'RSI_14']
     raw_data[cols_to_round] = raw_data[cols_to_round].round(2)
 
-    technical_data = raw_data.sort_values('date').groupby('symbol', group_keys=False).apply(lambda x: x.head(len(x) - 20))
+    technical_data = raw_data.sort_values('date', ascending=False).groupby('symbol', group_keys=False).apply(lambda x: x.dropna(subset=['RSI_14']))
 
     # Return the clean data and technical data
     logger.info(f"clean_data df contains {len(clean_data)} rows")
