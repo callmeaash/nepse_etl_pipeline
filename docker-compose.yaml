@@ -1,0 +1,13 @@
+version: '3'
+services:
+  airflow:
+    image: nepseetlpipeline-airflow:latest
+    volumes:
+      - ./dags:/opt/dags
+      - ./pipeline_utils:/opt/pipeline_utils
+      - ./scraping_utils:/opt/scraping_utils
+      - ./clean_data:/opt/clean_data
+      - ./stock_names_data:/opt/stock_names_data
+    ports:
+      - 8080:8080
+    command: airflow standalone
