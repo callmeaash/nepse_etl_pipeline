@@ -1,5 +1,5 @@
 import pandas as pd
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import logging
 import os
 
@@ -12,7 +12,7 @@ def load_data(clean_data: pd.DataFrame, technical_data: pd.DataFrame) -> None:
     """
 
     logger.info('Creating a folder to store clean data')
-    transformed_data_dir = os.path.join('clean_data')
+    transformed_data_dir = os.path.join('..', 'clean_data')
     try:
         os.makedirs(transformed_data_dir, exist_ok=True)
         logger.info(f'Directory created or already exists: {transformed_data_dir}')
@@ -41,14 +41,26 @@ def load_data(clean_data: pd.DataFrame, technical_data: pd.DataFrame) -> None:
         raise
     
     # Inserting the OHLC data into the database
-    stocks_symbol = clean_data[['symbol']]
     try:
         logger.info("Appending the stocks symbol in the stocks table")
-        stocks_symbol.to_sql('stocks', engine, if_exists='append', index=False)
+        symbols = clean_data['symbol'].tolist()
+        
+        query = """
+        INSERT INTO stocks (symbol)
+        VALUES (:symbol)
+        ON CONFLICT (symbol) DO NOTHING
+        """
+        
+        with engine.begin() as conn:
+            conn.execute(
+                text(query),
+                [{"symbol": sym} for sym in symbols]
+            )
+        logger.info(f"Processed {len(symbols)} symbols, ignoring duplicates")
     except Exception as e:
         logger.error(f"Error occured when appending the stocks symbol: {e}")
         raise
-    
+            
     try:
         logger.info("Inserting the ohlc data into ohlc table")
         stocks_id_from_db = pd.read_sql("SELECT id, symbol FROM stocks", engine)
