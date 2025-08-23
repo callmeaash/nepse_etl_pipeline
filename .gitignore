@@ -3,4 +3,4 @@
 etl_pipeline.log
 __pycache__/
 .pytest_cache/
-my_project.egg-info
+*.egg-info
