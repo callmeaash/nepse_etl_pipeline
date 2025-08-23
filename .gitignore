@@ -1,6 +1,6 @@
 .env
 .venv
-etl_pipeline.log
+*.log
 __pycache__/
 .pytest_cache/
 *.egg-info
