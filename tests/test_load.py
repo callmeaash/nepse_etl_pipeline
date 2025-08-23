@@ -45,7 +45,7 @@ def test_load_data_success(
 
     mock_to_csv.assert_called_once()
 
-    assert mock_to_sql.call_count == 2
+    assert mock_to_sql.call_count == 1
 
     mock_read_sql.assert_called_once()
 

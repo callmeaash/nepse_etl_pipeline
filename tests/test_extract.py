@@ -1,7 +1,5 @@
 from unittest.mock import patch, MagicMock
 import pandas as pd
-
-
 from pipeline_utils import extract
 
 
