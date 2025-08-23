@@ -12,7 +12,7 @@ def load_data(clean_data: pd.DataFrame, technical_data: pd.DataFrame) -> None:
     """
 
     logger.info('Creating a folder to store clean data')
-    transformed_data_dir = os.path.join('..', 'clean_data')
+    transformed_data_dir = os.path.join('clean_data')
     try:
         os.makedirs(transformed_data_dir, exist_ok=True)
         logger.info(f'Directory created or already exists: {transformed_data_dir}')
