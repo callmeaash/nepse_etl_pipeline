@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import logging
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 logger = logging.getLogger(__name__)
 
 
@@ -11,7 +12,7 @@ def extract_data(api_url: str) -> pd.DataFrame:
     Fetch data from API and Return as Dataframe
     """
 
-    stocks_file = os.path.abspath(os.path.join('stock_names_data', 'hydropower.csv'))
+    stocks_file = os.path.abspath(os.path.join(BASE_DIR, 'stock_names_data', 'hydropower.csv'))
 
     try:
         logger.info(f"Attempting to read tickers from {stocks_file}")
