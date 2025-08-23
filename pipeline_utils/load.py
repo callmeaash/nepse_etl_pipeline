@@ -34,20 +34,46 @@ def load_data(clean_data: pd.DataFrame, technical_data: pd.DataFrame) -> None:
     # Creating a connection to the postgresql
     try:
         logger.info("Attempting to create a connection to the database")
-        database_url = os.getenv('DATABASE_URL')
+        sqlite_path = os.path.join(BASE_DIR, "stocks_ohlc.db")
+        database_url = f"sqlite:///{sqlite_path}"
         engine = create_engine(database_url)
         logger.info(f'Successfully connected to {database_url}')
     except Exception as e:
         logger.error(f'Failed to create the connection: {e}')
         raise
     
+
+    # Creating tables if not exists in the db
+    with engine.begin() as conn:
+        conn.execute(text("""
+        CREATE TABLE IF NOT EXISTS stocks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            symbol TEXT NOT NULL UNIQUE
+            );
+        """))
+        conn.execute(text("""
+        CREATE TABLE IF NOT EXISTS ohlc (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            stock_id INTEGER NOT NULL,
+            date TEXT,
+            open REAL,
+            high REAL,
+            low REAL,
+            close REAL,
+            ltp REAL,
+            volume INTEGER,
+            amount REAL,
+            FOREIGN KEY(stock_id) REFERENCES stocks(id) ON DELETE CASCADE
+            );
+        """))
+
     # Inserting the OHLC data into the database
     try:
         logger.info("Appending the stocks symbol in the stocks table")
         symbols = clean_data['symbol'].tolist()
         
         query = """
-        INSERT INTO stocks (symbol)
+        INSERT INTO "stocks" (symbol)
         VALUES (:symbol)
         ON CONFLICT (symbol) DO NOTHING
         """
