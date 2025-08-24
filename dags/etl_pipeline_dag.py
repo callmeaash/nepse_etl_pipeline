@@ -44,7 +44,7 @@ with DAG(
     
     wait_for_file = FileSensor(
         task_id='check_stock_symbols_file_exists',
-        filepath='/opt/airflow/stock_names_data',
+        filepath='/opt/airflow/stock_names_data/stocks.csv',
         poke_interval=10,
         timeout=60,
         mode='poke'
