@@ -64,7 +64,7 @@ etl-project/
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/callmeaash/nepse_etl_pipeline.git
-cd your-repo
+cd nepse_etl_pipeline
 ```
 
 ### 2. Create Virtual Environment
