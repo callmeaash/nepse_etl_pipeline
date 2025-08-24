@@ -12,7 +12,7 @@ def extract_data(api_url: str) -> pd.DataFrame:
     Fetch data from API and Return as Dataframe
     """
 
-    stocks_file = os.path.abspath(os.path.join(BASE_DIR, 'stock_names_data', 'hydropower.csv'))
+    stocks_file = os.path.abspath(os.path.join(BASE_DIR, 'stock_names_data', 'stocks.csv'))
 
     try:
         logger.info(f"Attempting to read tickers from {stocks_file}")
