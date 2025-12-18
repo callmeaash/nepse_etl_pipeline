@@ -1,118 +1,107 @@
-# 📊 NEPSE ETL Pipeline with Airflow
+# 📊 NEPSE ETL Pipeline (Apache Airflow)
 
-This project implements an **ETL (Extract, Transform, Load) pipeline** using **Apache Airflow** for orchestration.
+An ETL pipeline built to collect, validate, transform, and store **NEPSE stock market data** using **Apache Airflow**, **PostgreSQL**, and **Docker**.
 
-The pipeline extracts stock data from an API, transforms it into a structured format, and loads it into a local database as well as csv file.
-
----
-
-## 🚀 Features
-- **Extract**: Fetch stock OHLC data from an API.
-- **Transform**: Clean, validate, and process raw data.
-- **Load**: Store processed data into database and csv file.
-- **Airflow DAG**: Automates and schedules the ETL workflow.
-- **Logging**: Logs ETL pipeline steps for monitoring.
+This project focuses on **data reliability, validation, and orchestration**.
 
 ---
 
-## 🛠️ Tools Used
+## 🧱 Architecture Overview
 
-- **[Pandas](https://pandas.pydata.org/)** – For data extraction and transformation.
-- **[SQLAlchemy](https://www.sqlalchemy.org/)** – To interact with databases in a scalable and database-agnostic way.
-- **[Apache Airflow](https://airflow.apache.org/)** – For orchestrating, scheduling, and monitoring ETL workflows.
-- **Logging (Python `logging` module)** – For structured and configurable logging of pipeline events and errors.
-- **[Pytest](https://docs.pytest.org/)** – For writing and running unit tests to ensure pipeline reliability.
+- **Apache Airflow (LocalExecutor)**  
+  Orchestrates and schedules ETL workflows.
+
+- **PostgreSQL**  
+  Stores Airflow metadata and processed stock market data.
+
+- **Docker Compose**  
+  Manages containerized services for Airflow and PostgreSQL.
+
+---
+
+## 🔁 ETL Workflow
+
+1. **File Sensor**  
+   Waits for the stock symbol file (`stocks.csv`) to become available.
+
+2. **HTTP Sensor**  
+   Verifies API availability and validates JSON responses before execution.
+
+3. **Extract**  
+   Fetches OHLC stock data from an external API.
+
+4. **Transform**  
+   - Performs data cleaning and validation  
+   - Computes technical indicators  
+   - Ensures schema consistency  
+
+5. **Load**  
+   - Stores cleaned OHLC data in PostgreSQL  
+   - Saves transformed datasets as CSV files for offline analysis  
 
 
 ---
 
-## 🗂️ Project Structure
-```bash
-etl-project/
-│── dags/                    # Airflow DAG definitions
-│   └── etl_pipeline_dag.py           # Main ETL DAG
-│
-|── database_schema/
-|   └── erdiagram            # ER diagram of database
-│   └── sqliteSchema.sql
-│   └── schema.sql           # PostgreSQL database schema  
-│
-│── stock_names_data/        # File storing stocks symbol
-│   └── stocks.csv      
-│
-│── pipeline_utils/          # ETL logic
-│   ├── extract.py           # Data extraction functions
-│   ├── transform.py         # Data transformation functions
-│   ├── load.py              # Data loading functions
-│   └── __init__.py
-│
-│── tests/                   # Unit tests
-│   └── test_extract.py
-│   └── test_transform.py
-│   └── test_load.py
-│
-|── docker-compose-yaml      # Airflow configs for docker
-│── etl_pipeline.py          # Python script to execute the pipeline
-│── stocks_ohlc.db           # SQLite database (created after first run)
-│── requirements.txt         # Python dependencies
-│── README.md                # Project documentation
+## 📁 Project Structure
 
-```
-
-## ⚙️ Setup and Installation
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/callmeaash/nepse_etl_pipeline.git
-cd nepse_etl_pipeline
-```
-
-### 2. Create Virtual Environment
-```bash
-python -m venv .venv
-source .venv/bin/activate    # On Linux/Mac
-.venv\Scripts\activate     # On Windows
-```
-
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Setup Airflow with Docker
-Make sure you have **Docker** and **Docker Compose** installed.
-
-
-
-#### Start Airflow
-```bash
-docker-compose up -d
-```
-
-
-### 5. Running the ETL Script Manually (Optional)
-```bash
-python etl_pipeline.py
-```
-
-### 6. Logs (For Manual ETL execution)
-Check logs in:
-```bash
-etl_pipeline.log
+```text
+.
+├── dags/
+│   └── nepse_pipeline.py
+├── stock_names_data/
+│   └── stocks.csv
+├── clean_data/
+├── pipeline_utils/
+├── etl_pipeline.py
+├── requirements.txt
+├── .env
+└── docker-compose.yml
 ```
 
 ---
 
-## 🧪 Testing
-Run unit tests:
+## 🚀 Setup & Execution
+
+### 1️⃣ Start Services
+
 ```bash
-pytest tests/
+docker compose up -d
+```
+
+### 2️⃣ Access Airflow UI
+
+```text
+URL      : http://localhost:8080
+Username : admin
+Password : admin
+```
+
+### 3️⃣ Run the Pipeline
+
+```text
+1. Open the Airflow UI
+2. Enable the `nepse_pipeline` DAG
+3. Trigger the DAG manually or wait for the scheduled run
 ```
 
 ---
 
-## 📝 Notes
-- Environment variables must be defined in `.env`  
-- SQLite DB (`stocks_ohlc.db`) is used for local development.  
-- For production, consider PostgreSQL or MySQL.
-- Extract more stocks symbol using the scrape function available in scraping_utils directory and append them in the stocks.csv in stock_names_data directory
+## 🛠 Technologies Used
+
+```text
+- Python 3.12
+- Apache Airflow 2.9.3
+- PostgreSQL 16
+- Docker & Docker Compose
+- Pandas
+- SQLAlchemy
+```
+
+---
+
+## 🎯 Purpose
+
+```text
+Demonstrates practical ETL design, Airflow orchestration,
+data validation, and containerized data engineering setup.
+```
