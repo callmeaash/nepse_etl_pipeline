@@ -50,7 +50,7 @@ This project focuses on **data reliability, validation, and orchestration**.
 │   └── nepse_pipeline.py
 ├── stock_names_data/
 │   └── stocks.csv
-├── clean_data/
+├── cleanData/
 ├── pipeline_utils/
 ├── etl_pipeline.py
 ├── requirements.txt
