@@ -91,7 +91,7 @@ Password : admin
 ```text
 - Python 3.12
 - Apache Airflow 2.9.3
-- PostgreSQL 16
+- PostgreSQL 17
 - Docker & Docker Compose
 - Pandas
 - SQLAlchemy
