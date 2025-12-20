@@ -15,7 +15,7 @@ api_url = os.getenv('API_KEY')
 default_args = {
     'owner': 'aashish',
     'depends_on_past': True,
-    'start_date': datetime(2025, 8, 23),
+    'start_date': datetime(2025, 12, 20),
     'email': 'aashish@gmail.com',
     'email_on_retry': False,
     'retries': 2,

@@ -33,27 +33,25 @@ def load_data(clean_data: pd.DataFrame, technical_data: pd.DataFrame) -> None:
 
     # Creating a connection to the postgresql
     try:
-        logger.info("Attempting to create a connection to the database")
-        sqlite_path = os.path.join(BASE_DIR, "stocks_ohlc.db")
-        database_url = f"sqlite:///{sqlite_path}"
+        logger.info("Attempting to create a connection to the database");
+        database_url = os.getenv('DATABASE_URL')
         engine = create_engine(database_url)
         logger.info(f'Successfully connected to {database_url}')
     except Exception as e:
         logger.error(f'Failed to create the connection: {e}')
         raise
-    
 
     # Creating tables if not exists in the db
     with engine.begin() as conn:
         conn.execute(text("""
         CREATE TABLE IF NOT EXISTS stocks (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             symbol TEXT NOT NULL UNIQUE
             );
         """))
         conn.execute(text("""
         CREATE TABLE IF NOT EXISTS ohlc (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             stock_id INTEGER NOT NULL,
             date TEXT,
             open REAL,
