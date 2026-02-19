@@ -60,9 +60,9 @@ This project focuses on **data reliability, validation, and orchestration**.
 
 ---
 
-## 🚀 Setup & Execution
+## Setup & Execution
 
-### 1️⃣ Start Services
+### Start Services
 
 ```bash
 docker compose up -d
