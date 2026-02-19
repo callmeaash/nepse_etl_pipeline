@@ -1,4 +1,4 @@
-# 📊 NEPSE ETL Pipeline (Apache Airflow)
+# NEPSE ETL Pipeline (Apache Airflow)
 
 An ETL pipeline built to collect, validate, transform, and store **NEPSE stock market data** using **Apache Airflow**, **PostgreSQL**, and **Docker**.
 
@@ -6,7 +6,7 @@ This project focuses on **data reliability, validation, and orchestration**.
 
 ---
 
-## 🧱 Architecture Overview
+## Architecture Overview
 
 - **Apache Airflow (LocalExecutor)**  
   Orchestrates and schedules ETL workflows.
@@ -19,7 +19,7 @@ This project focuses on **data reliability, validation, and orchestration**.
 
 ---
 
-## 🔁 ETL Workflow
+## ETL Workflow
 
 1. **File Sensor**  
    Waits for the stock symbol file (`stocks.csv`) to become available.
@@ -42,7 +42,7 @@ This project focuses on **data reliability, validation, and orchestration**.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 .
@@ -68,7 +68,7 @@ This project focuses on **data reliability, validation, and orchestration**.
 docker compose up -d
 ```
 
-### 2️⃣ Access Airflow UI
+### Access Airflow UI
 
 ```text
 URL      : http://localhost:8080
@@ -76,7 +76,7 @@ Username : admin
 Password : admin
 ```
 
-### 3️⃣ Run the Pipeline
+### Run the Pipeline
 
 ```text
 1. Open the Airflow UI
@@ -86,7 +86,7 @@ Password : admin
 
 ---
 
-## 🛠 Technologies Used
+## Technologies Used
 
 ```text
 - Python 3.12
@@ -99,7 +99,7 @@ Password : admin
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 ```text
 Demonstrates practical ETL design, Airflow orchestration,
